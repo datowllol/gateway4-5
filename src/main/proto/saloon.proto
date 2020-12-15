@@ -1,0 +1,50 @@
+syntax = "proto3";
+package com.saloon.Saloon;
+option java_multiple_files = true;
+
+
+
+message SaloonResponse {
+  string tableId = 1;
+  int32 placeNum = 2;
+  string uniqueName = 3;
+  string occupiedTableId = 4;
+  string freeTableId = 5;
+}
+
+message VisitorsRequest{
+  string visitorId = 1;
+  int32 visitorsNum = 2;
+  string occupiedTableID = 3;
+}
+
+message FreeTableRequest{
+  string freeTableId = 1;
+  string  saloonId = 2;
+}
+
+message AllSaloonRequest {
+
+}
+
+message AllSaloonResponse {
+  repeated SaloonResponse saloon = 1;
+}
+
+message DeleteSaloonRequest {
+  string id = 1;
+}
+message   DeleteSaloonResponse{}
+
+message SaloonRequestId {
+  string id = 1;
+}
+
+service SaloonService {
+  rpc all(AllSaloonRequest) returns (AllSaloonResponse);
+  rpc add(SaloonResponse) returns (SaloonResponse);
+  rpc byId(SaloonRequestId) returns (SaloonResponse);
+  rpc byNum(VisitorsRequest) returns (SaloonResponse);
+  rpc setFree(FreeTableRequest) returns (FreeTableRequest);
+  rpc delete(DeleteSaloonRequest) returns (DeleteSaloonResponse);
+}

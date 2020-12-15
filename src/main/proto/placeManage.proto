@@ -1,0 +1,36 @@
+syntax = "proto3";
+package com.placeManage.Place_Manage_Service;
+option java_multiple_files = true;
+
+
+
+message VisitorsRequest {
+  string visitorId = 1;
+  int32 visitorsNum = 2;
+  string occupiedTableID = 3;
+}
+
+message AllVisitorsRequest {
+
+}
+
+message AllVisitorsResponse {
+  repeated VisitorsRequest visitors = 1;
+}
+
+message DeleteVisitorsRequest {
+  string id = 1;
+}
+message   DeleteVisitorsResponse{}
+
+message VisitorsRequestId {
+  string id = 1;
+}
+
+
+service PlaceManageService {
+  rpc all(AllVisitorsRequest) returns (AllVisitorsResponse);
+  rpc add(VisitorsRequest) returns (VisitorsRequest);
+  rpc byId(VisitorsRequestId) returns (VisitorsRequest);
+  rpc delete(DeleteVisitorsRequest) returns (DeleteVisitorsResponse);
+}

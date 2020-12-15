@@ -1,0 +1,38 @@
+syntax = "proto3";
+package com.beer_purchase.Beer_Purchase_Service;
+option java_multiple_files = true;
+
+
+
+message SoldBeerRequest {
+  string soldBeerId = 1;
+  int32 moneyGain = 2;
+  string beerType = 3;
+  string visitorsId = 4;
+}
+
+
+
+message AllSoldBeerRequest {
+
+}
+
+message AllSoldBeerResponse {
+  repeated SoldBeerRequest soldBeer = 1;
+}
+
+message DeleteSoldBeerRequest {
+  string id = 1;
+}
+message   DeleteSoldBeerResponse{}
+
+message SoldBeerRequestId {
+  string id = 1;
+}
+
+service BeerPurchaseService {
+  rpc all(AllSoldBeerRequest) returns (AllSoldBeerResponse);
+  rpc add(SoldBeerRequest) returns (SoldBeerRequest);
+  rpc byId(SoldBeerRequestId) returns (SoldBeerRequest);
+  rpc delete(DeleteSoldBeerRequest) returns (DeleteSoldBeerResponse);
+}
